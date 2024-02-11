@@ -11,25 +11,25 @@ export class RegisterUseDto {
     const { name, email, password } = object;
 
     if (!name) {
-      return ["Missing name", undefined];
+      return ["Missing name", undefined]; 
     }
 
     if (!email) {
-      return ["Missing email", undefined];
+      return ["Missing email", undefined]; 
     }
 
     if (!regularExps.email.test(email)) {
-      return ["Invalid email", undefined];
+      return ["Invalid email", undefined]; 
     }
 
     if (!password) {
-      return ["Missing password", undefined];
+      return ["Missing password", undefined]; 
     }
 
     if (password.length < 6) {
-      return ["Password must be at least 6 characters", undefined];
+      return ["Password must be at least 6 characters", undefined]; 
     }
 
-    return [undefined, new RegisterUseDto(name, email, password)];
+    return [undefined, new RegisterUseDto(name, email, password)]; 
   }
 }
