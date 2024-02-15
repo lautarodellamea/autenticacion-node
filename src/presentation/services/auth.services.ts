@@ -1,4 +1,4 @@
-import { bcryptAdapter } from "../../config";
+import { JwtAdapter, bcryptAdapter } from "../../config";
 import { UserModel } from "../../data";
 import { CustomError, LoginUserDto, UserEntity } from "../../domain";
 import { RegisterUserDto } from "../../domain/dtos/auth/register-user.dto";
@@ -47,16 +47,13 @@ export class AuthService {
       throw CustomError.badRequest("Password is not valid");
     }
 
-    try {
-      const { password, ...userEntity } = UserEntity.fromObject(user);
-      return { user: userEntity, token: "ABC" };
-    } catch (error) {
-      throw CustomError.internalServer(`${error}`);
-    }
+    const { password, ...userEntity } = UserEntity.fromObject(user);
 
-    // return {
-    //   user: {... info del usuario},
-    //   token: "ABC"
-    // }
+    // generamos el token
+    const token = await JwtAdapter.generateToken({ id: user.id, email: user.email });
+
+    if (!token) throw CustomError.internalServer("Error while creating JWT");
+
+    return { user: userEntity, token: token };
   }
 }
