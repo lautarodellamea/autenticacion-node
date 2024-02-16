@@ -12,6 +12,7 @@ export class Server {
 
   public readonly app = express();
   private serverListener?: any;
+  
   private readonly port: number;
   private readonly publicPath: string;
   private readonly routes: Router;
