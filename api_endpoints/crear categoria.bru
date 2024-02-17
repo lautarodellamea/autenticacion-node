@@ -1,0 +1,18 @@
+meta {
+  name: crear categoria
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/categories
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Hot Chocolate",
+    "available":"true"
+  }
+}
